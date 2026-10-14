@@ -6,7 +6,7 @@
 
 module ColumnSumMatrix(
     createColumnSumMatrix,
-    ColumnMatrixError
+    ColumnMatrixError(..)
 ) where
 
 import Data.List (transpose)

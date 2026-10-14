@@ -8,6 +8,12 @@
 import Test.Hspec
 import ColumnSumMatrix
 
+
+main :: IO ()
+main = hspec spec
+
+
+
 spec :: Spec
 spec = describe "createColumnSumMatrix" $ do
   it "rejects an empty list" $
@@ -20,9 +26,9 @@ spec = describe "createColumnSumMatrix" $ do
     createColumnSumMatrix [[1, 0], [0]] `shouldBe` Left RaggedRows
 
   it "rejects columns with different sums" $
-  createColumnSumMatrix [[1, 2], [1, 3]] `shouldBe` Left ColumnsDoNotSumEqually
+    createColumnSumMatrix [[1, 2], [1, 3]] `shouldBe` Left ColumnsDoNotSumToSameNumber
   -- column sums are 2 and 5
 
   it "accepts columns that all match the first" $
-  createColumnSumMatrix [[1, 2], [3, 2]] `shouldSatisfy` either (const False) (const True)
+    createColumnSumMatrix [[1, 2], [3, 2]] `shouldSatisfy` either (const False) (const True)
   -- column sums are 4 and 4
