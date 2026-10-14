@@ -10,6 +10,9 @@ module ColumnSumMatrix(
 )
 where
 
+import Data.Matrix
+import Data.Ratio ((%))
+
 data ColumnMatrixError
   = EmptyMatrix            
   | EmptyRows              
@@ -17,8 +20,7 @@ data ColumnMatrixError
   | ColumnsDoNotSumToSameNumber   
   deriving (Show, Eq)
 
-import Data.Matrix
-import Data.Ratio ((%))
+
 
 -- Here I want a function that creates a column sum matrix
 -- and returns an error if there is none. The user needs to state
