@@ -24,8 +24,6 @@ import Data.Ratio ((%))
 -- and returns an error if there is none. The user needs to state
 -- their entries.
 
-rationalOne :: Rational
-rationalOne = 1 % 1
 
 createColumnSumMatrix ::  [[Rational]] -> Either ColumnMatrixError (Matrix Rational)
 createColumnSumMatrix [] = Left EmptyMatrix
