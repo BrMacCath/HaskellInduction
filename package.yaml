@@ -1,10 +1,10 @@
 name:                HaskellInduction
 version:             0.1.0.0
-github:              "githubuser/HaskellInduction"
+github:              "brmaccath/HaskellInduction"
 license:             BSD-3-Clause
-author:              "Author name here"
+author:              "Brian Collery"
 maintainer:          "example@example.com"
-copyright:           "2026 Author name here"
+copyright:           "2026 Brian Collery"
 
 extra-source-files:
 - README.md
