@@ -38,6 +38,8 @@ library:
   source-dirs: src
   exposed-modules:
   - ColumnSumMatrix
+  - SquareMatrix
+  - MatrixError
 
 executables:
   HaskellInduction-exe:
