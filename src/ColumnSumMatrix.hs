@@ -33,7 +33,7 @@ createColumnSumMatrix [] = Left EmptyMatrix
 createColumnSumMatrix rows@(r : rs)
   | null r                                   = Left EmptyRows
   | any ((/= length r) . length) rs          = Left RaggedRows
-  | any ((/= target) . sum) (transpose rows) = Left ColumnsDoNotSumToOne
+  | any ((/= target) . sum) (transpose rows) = Left ColumnsDoNotSumToSameNumber
   | otherwise                                = Right (fromLists rows)
   where
     colSums = map sum (transpose rows)
