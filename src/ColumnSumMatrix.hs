@@ -5,32 +5,21 @@
 
 
 module ColumnSumMatrix(
-    createColumnSumMatrix,
-    ColumnMatrixError(..)
+    validateColumnSumMatrix
 ) where
 
 import Data.List (transpose)
 import Data.Matrix (Matrix, fromLists)
-import Data.Ratio ((%))
-
-data ColumnMatrixError
-  = EmptyMatrix            
-  | EmptyRows              
-  | RaggedRows             
-  | ColumnsDoNotSumToSameNumber   
-  deriving (Show, Eq)
-
-
+import MatrixError
 
 -- Here I want a function that creates a column sum matrix
 -- and returns an error if there is none. The user needs to state
 -- their entries.
 
+validateColumnSumMatrix :: (Num a,Eq a) =>  [[a]] -> Either MatrixError (Matrix a)
+validateColumnSumMatrix [] = Left EmptyMatrix
 
-createColumnSumMatrix ::  [[Rational]] -> Either ColumnMatrixError (Matrix Rational)
-createColumnSumMatrix [] = Left EmptyMatrix
-
-createColumnSumMatrix rows@(r : rs)
+validateColumnSumMatrix rows@(r : rs)
   | null r                                   = Left EmptyRows
   | any ((/= length r) . length) rs          = Left RaggedRows
   | any ((/= target) . sum) (transpose rows) = Left ColumnsDoNotSumToSameNumber

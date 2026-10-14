@@ -7,7 +7,7 @@
 
 import Test.Hspec
 import ColumnSumMatrix
-
+import MatrixError
 
 main :: IO ()
 main = hspec spec
@@ -15,20 +15,20 @@ main = hspec spec
 
 
 spec :: Spec
-spec = describe "createColumnSumMatrix" $ do
+spec = describe "validateColumnSumMatrix" $ do
   it "rejects an empty list" $
-    createColumnSumMatrix [] `shouldBe` Left EmptyMatrix
+    validateColumnSumMatrix [] `shouldBe` Left EmptyMatrix
 
   it "rejects empty rows" $
-    createColumnSumMatrix [[]] `shouldBe` Left EmptyRows
+    validateColumnSumMatrix [[]] `shouldBe` Left EmptyRows
 
   it "rejects ragged rows" $
-    createColumnSumMatrix [[1, 0], [0]] `shouldBe` Left RaggedRows
+    validateColumnSumMatrix [[1, 0], [0]] `shouldBe` Left RaggedRows
 
   it "rejects columns with different sums" $
-    createColumnSumMatrix [[1, 2], [1, 3]] `shouldBe` Left ColumnsDoNotSumToSameNumber
+    validateColumnSumMatrix [[1, 2], [1, 3]] `shouldBe` Left ColumnsDoNotSumToSameNumber
   -- column sums are 2 and 5
 
   it "accepts columns that all match the first" $
-    createColumnSumMatrix [[1, 2], [3, 2]] `shouldSatisfy` either (const False) (const True)
+    validateColumnSumMatrix [[1, 2], [3, 2]] `shouldSatisfy` either (const False) (const True)
   -- column sums are 4 and 4
