@@ -21,6 +21,7 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- matrix
 
 ghc-options:
 - -Wall
@@ -35,6 +36,8 @@ ghc-options:
 
 library:
   source-dirs: src
+  exposed-modules:
+  - ColumnSumMatrix
 
 executables:
   HaskellInduction-exe:
@@ -49,7 +52,7 @@ executables:
 
 tests:
   HaskellInduction-test:
-    main:                Spec.hs
+    main:                Tests.hs
     source-dirs:         test
     ghc-options:
     - -threaded
