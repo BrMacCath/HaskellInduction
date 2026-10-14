@@ -26,6 +26,8 @@ source-repository head
 library
   exposed-modules:
       ColumnSumMatrix
+      SquareMatrix
+      MatrixError
   other-modules:
       Paths_HaskellInduction
   autogen-modules:
