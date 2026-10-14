@@ -7,10 +7,10 @@
 module ColumnSumMatrix(
     createColumnSumMatrix,
     ColumnMatrixError
-)
-where
+) where
 
-import Data.Matrix
+import Data.List (transpose)
+import Data.Matrix (Matrix, fromLists)
 import Data.Ratio ((%))
 
 data ColumnMatrixError
