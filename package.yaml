@@ -22,6 +22,8 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 - matrix
+- vector
+- gnuplot
 
 ghc-options:
 - -Wall
@@ -40,6 +42,7 @@ library:
   - ColumnSumMatrix
   - SquareMatrix
   - MatrixError
+  - PiecewiseMatrixMultiplication
 
 executables:
   HaskellInduction-exe:
@@ -51,6 +54,9 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - HaskellInduction
+    - base
+    - matrix
+    - vector
 
 tests:
   HaskellInduction-test:
