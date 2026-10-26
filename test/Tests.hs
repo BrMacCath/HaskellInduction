@@ -9,6 +9,8 @@ import Test.Hspec
 import ColumnSumMatrix
 import MatrixError
 
+-- Can make subfiles in the test Folder and then run them here.
+
 main :: IO ()
 main = hspec spec
 
