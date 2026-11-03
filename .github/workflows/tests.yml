@@ -17,6 +17,8 @@ jobs:
           enable-stack: true
           stack-no-global: true
           stack-setup-ghc: true
+          stack-version: 'latest'
+          ghc-version: ''
 
       - name: Cache Stack
         uses: actions/cache@v4
@@ -29,4 +31,20 @@ jobs:
             ${{ runner.os }}-stack-
 
       - name: Build and test
-        run: stack test --no-terminal
+        run: stack test --no-terminal --coverage
+
+      - name: Install hpc-codecov
+        run: stack install hpc-codecov --local-bin-path "$HOME/.local/bin"
+
+
+      - name: Generate Codecov report
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          "$HOME/.local/bin/hpc-codecov" stack:all -X Paths_ -o codecov.json
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: codecov.json
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true

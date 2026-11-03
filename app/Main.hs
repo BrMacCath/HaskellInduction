@@ -4,7 +4,7 @@ import Data.Ratio ((%))
 import PiecewiseMatrixMultiplication
 import qualified Data.Vector as V
 -- plus your Layers module and piecewiseMatrixMult / pieceFunc
-
+import Graphics.Gnuplot.Simple
 type Vec = V.Vector Rational
 
 twoPairs :: [(Matrix Rational, Vec)]
@@ -34,13 +34,20 @@ loop f vec current orig
 
 
 main :: IO ()
-main =
+main = do
   case piecewiseMatrixMult twoPairs of
     Nothing -> putStrLn "Invalid list of pairs"
     Just f  -> do
         let origVec    = V.fromList [9, 2, 0] :: Vec
             origSum = floor (V.sum origVec) :: Int
         loop f origVec origSum origSum
+  plotPathStyle
+    [Title "My points", XLabel "x", YLabel "y"
+    , PNG "points.png"
+    , Custom "key" ["off"]]
+    (defaultStyle {plotType = LinesPoints})
+    [(1, 2), (2,4), (3, 16 :: Double)]
+  
             
 
 
