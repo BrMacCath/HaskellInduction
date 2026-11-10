@@ -18,29 +18,24 @@ twoPairs =
 
 
 
-loop :: (Vec -> Maybe Vec) -> Vec -> Int -> Int -> IO ()
-loop f vec current orig
-  | current < orig = do
-      putStrLn "Stopped:"
-      print vec
+loop :: (Vec -> Maybe Vec) -> Vec -> Int -> Int-> [Vec] -> IO [Vec]
+loop f vec current orig vecList
+  | current < orig = return vecList
   | otherwise =
       case f vec of
-        Nothing   -> putStrLn "The function failed on this vector"
+        Nothing -> do
+          putStrLn "The function failed on this vector"
+          return vecList
         Just vec' -> do
           let current' = floor (V.sum vec') :: Int
-          print vec'
-          print current'
-          loop f vec' current' orig
+              newList  = vecList ++ [vec']
+          loop f vec' current' orig newList
 
 
 main :: IO ()
 main = do
-  case piecewiseMatrixMult twoPairs of
-    Nothing -> putStrLn "Invalid list of pairs"
-    Just f  -> do
-        let origVec    = V.fromList [9, 2, 0] :: Vec
-            origSum = floor (V.sum origVec) :: Int
-        loop f origVec origSum origSum
+  let numberPath = pieceFuncPath twoPairs (V.fromList [9, 2, 0])
+  print numberPath
   plotPathStyle
     [Title "My points", XLabel "x", YLabel "y"
     , PNG "points.png"
