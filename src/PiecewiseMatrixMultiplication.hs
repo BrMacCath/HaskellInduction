@@ -6,7 +6,8 @@
 -- Each matrix satisfies that it is a column sum matrix.
 
 module PiecewiseMatrixMultiplication(
-    piecewiseMatrixMult
+    piecewiseMatrixMult,
+    pieceFuncPath
 ) where
 
 import Control.Monad (guard)
@@ -51,3 +52,22 @@ pieceFunc layers x = do
       (m, v) = ps !! index                     -- always in range thanks to mod
 
   return (getCol 1 (m * colVector x + colVector v))
+
+pieceFuncPathLoop :: (Vec -> Maybe Vec) -> Vec -> Int -> Int-> [Vec] -> [Vec]
+pieceFuncPathLoop f vec current orig vecList
+  | current < orig = vecList
+  | otherwise =
+      case f vec of
+        Nothing -> vecList
+        Just vec' -> 
+          let current' = floor (V.sum vec') :: Int
+          in pieceFuncPathLoop f vec' current' orig (vecList ++ [vec'])
+
+
+pieceFuncPath:: [(Matrix Rational, Vec)] -> Vec ->  [Vec]
+pieceFuncPath matVecList origVector = do
+  case piecewiseMatrixMult matVecList of
+    Nothing -> []
+    Just f -> 
+      let origSum = floor (V.sum origVector) :: Int
+      in pieceFuncPathLoop f origVector origSum origSum [origVector]
