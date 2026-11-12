@@ -25,5 +25,4 @@ validateColumnSumMatrix rows@(r : rs)
   | any ((/= target) . sum) (transpose rows) = Left ColumnsDoNotSumToSameNumber
   | otherwise                                = Right (fromLists rows)
   where
-    colSums = map sum (transpose rows)
     target  = sum (map head rows)

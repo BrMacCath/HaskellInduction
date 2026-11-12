@@ -17,8 +17,6 @@ import qualified Data.Vector as V
 
 type Vec = V.Vector Rational
 
-type Layer = (Matrix Rational, Vec)
-
 -- Int is the common row count n
 data Layers = Layers Int [(Matrix Rational, Vec)]
 
