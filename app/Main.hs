@@ -17,21 +17,6 @@ twoPairs =
   ]
 
 
-
-loop :: (Vec -> Maybe Vec) -> Vec -> Int -> Int-> [Vec] -> IO [Vec]
-loop f vec current orig vecList
-  | current < orig = return vecList
-  | otherwise =
-      case f vec of
-        Nothing -> do
-          putStrLn "The function failed on this vector"
-          return vecList
-        Just vec' -> do
-          let current' = floor (V.sum vec') :: Int
-              newList  = vecList ++ [vec']
-          loop f vec' current' orig newList
-
-
 main :: IO ()
 main = do
   let numberPath = pieceFuncPath twoPairs (V.fromList [9, 2, 0])
