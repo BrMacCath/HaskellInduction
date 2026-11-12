@@ -1,5 +1,4 @@
 module Main (main) where
-import Data.Matrix
 import PiecewiseMatrixMultiplication
 import qualified Data.Vector as V
 -- plus your Layers module and piecewiseMatrixMult / pieceFunc
