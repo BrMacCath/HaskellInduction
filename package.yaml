@@ -45,7 +45,7 @@ library:
   - PiecewiseMatrixMultiplication
 
 executables:
-  HaskellInduction-exe:
+  Haskell-Induction-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -59,8 +59,8 @@ executables:
     - vector
 
 tests:
-  HaskellInduction-test:
-    main:                Tests.hs
+  Haskell-Induction-test:
+    main:                Spec.hs
     source-dirs:         test
     ghc-options:
     - -threaded
@@ -69,3 +69,4 @@ tests:
     dependencies:
     - HaskellInduction
     - hspec
+    build-tools: hspec-discover

@@ -1,19 +1,9 @@
--- Things to Test
--- - Filling in a non column matrix returns an error.
--- - Filling in a column matrix returns a matrix.
--- - Applying a column row matrix to a vector keeps
--- - the projected sum the same.
+module ColumnSumSpec.ColumnSumSpec (spec) where
 
 
 import Test.Hspec
 import ColumnSumMatrix
 import MatrixError
-
--- Can make subfiles in the test Folder and then run them here.
-
-main :: IO ()
-main = hspec spec
-
 
 
 spec :: Spec
