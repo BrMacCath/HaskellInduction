@@ -43,6 +43,7 @@ library:
   - SquareMatrix
   - MatrixError
   - PiecewiseMatrixMultiplication
+  - CollatzExample
 
 executables:
   Haskell-Induction-exe:
