@@ -7,7 +7,8 @@
 
 module PiecewiseMatrixMultiplication(
     piecewiseMatrixMult,
-    pieceFuncPath
+    pieceFuncPath,
+    pieceFuncPathList
 ) where
 
 import Control.Monad (guard)
@@ -76,7 +77,7 @@ pieceFuncPath matVecList origVector = do
 
 
 pieceFuncPathList:: [(Matrix Rational, Vec)] -> [Vec] -> [[Vec] ]
-pieceFuncPathList matVecList [] = []
+pieceFuncPathList _ [] = []
 pieceFuncPathList matVecList vecList = do
   case piecewiseMatrixMult matVecList of
     Nothing -> []
