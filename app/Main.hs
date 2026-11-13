@@ -9,7 +9,9 @@ import CollatzExample
 main :: IO ()
 main = do
   let numberPath = pieceFuncPath collatzMatrixs (V.fromList [9, 2, 0])
+  let numberPathList = pieceFuncPathList collatzMatrixs [(V.fromList [9, 2, 0]),(V.fromList [9, 2, 0])]
   print numberPath
+  print numberPathList
   plotPathStyle
     [Title "My points", XLabel "x", YLabel "y"
     , PNG "points.png"
