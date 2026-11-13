@@ -80,5 +80,4 @@ pieceFuncPathList matVecList [] = []
 pieceFuncPathList matVecList vecList = do
   case piecewiseMatrixMult matVecList of
     Nothing -> []
-    Just f -> 
-      map (createPath f) vecList 
+    Just f -> map (createPath f) vecList 
