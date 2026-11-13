@@ -29,7 +29,9 @@ library
       SquareMatrix
       MatrixError
       PiecewiseMatrixMultiplication
+      CollatzExample
   other-modules:
+      VectorType
       Paths_HaskellInduction
   autogen-modules:
       Paths_HaskellInduction
@@ -38,11 +40,12 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
+    , gnuplot
     , matrix
     , vector
   default-language: Haskell2010
 
-executable HaskellInduction-exe
+executable Haskell-Induction-exe
   main-is: Main.hs
   other-modules:
       Paths_HaskellInduction
@@ -54,23 +57,30 @@ executable HaskellInduction-exe
   build-depends:
       HaskellInduction
     , base
+    , gnuplot
     , matrix
     , vector
   default-language: Haskell2010
 
-test-suite HaskellInduction-test
+test-suite Haskell-Induction-test
   type: exitcode-stdio-1.0
-  main-is: Tests.hs
+  main-is: Spec.hs
   other-modules:
+      ColumnSumSpec.ColumnSumSpec
+      PiecewiseMatrixMultSpec.PiecewiseMatrixMultSpec
+      SquareMatrixSpec.SquareMatrixSpec
       Paths_HaskellInduction
   autogen-modules:
       Paths_HaskellInduction
   hs-source-dirs:
       test
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-tool-depends:
+      hspec-discover:hspec-discover
   build-depends:
       HaskellInduction
     , base >=4.7 && <5
+    , gnuplot
     , hspec
     , matrix
     , vector
