@@ -39,6 +39,8 @@ piecewiseMatrixMult matVecList = do
   layers <- mkLayers matVecList
   return (pieceFunc layers)
 
+
+-- This is a piecewise function on whole numbers
 pieceFunc :: Layers -> Vec -> Maybe Vec
 pieceFunc layers x = do
   let s = V.sum x
@@ -61,11 +63,22 @@ pieceFuncPathLoop f vec current orig vecList
           let current' = floor (V.sum vec') :: Int
           in pieceFuncPathLoop f vec' current' orig (vecList ++ [vec'])
 
+createPath:: (Vec -> Maybe Vec) -> Vec -> [Vec]
+createPath f origVector = 
+    let origSum = floor (V.sum origVector) :: Int
+    in pieceFuncPathLoop f origVector origSum origSum [origVector]
 
 pieceFuncPath:: [(Matrix Rational, Vec)] -> Vec ->  [Vec]
 pieceFuncPath matVecList origVector = do
   case piecewiseMatrixMult matVecList of
     Nothing -> []
+    Just f -> createPath f origVector
+
+
+pieceFuncPathList:: [(Matrix Rational, Vec)] -> [Vec] -> [[Vec] ]
+pieceFuncPathList matVecList [] = []
+pieceFuncPathList matVecList vecList = do
+  case piecewiseMatrixMult matVecList of
+    Nothing -> []
     Just f -> 
-      let origSum = floor (V.sum origVector) :: Int
-      in pieceFuncPathLoop f origVector origSum origSum [origVector]
+      map (createPath f) vecList 
